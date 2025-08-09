@@ -5,21 +5,21 @@ models:
     tokenizer: "kmer"
     kmer: 6
     max_length: 512
-    conda_env: "dnabert1_env"
+    conda_env: "dna_transformers_env"  # Shared environment
     
   dnabert2:
     class_name: "DNABert2Model"
     pretrained_path: "zhihan1996/DNABERT-2-117M"
     tokenizer: "bpe"
     max_length: 512
-    conda_env: "dnabert2_env"
+    conda_env: "dnabert2_env"  # Unique environment (specific requirements)
     
   nucleotide_transformer:
     class_name: "NucleotideTransformerModel"
     pretrained_path: "InstaDeepAI/nucleotide-transformer-v2-500m-multi-species"
     tokenizer: "6mer"
     max_length: 1000
-    conda_env: "nucleotide_transformer_env"
+    conda_env: "nucleotide_transformer_env"  # Unique environment (JAX dependencies)
     
   prokbert:
     class_name: "ProkBERTModel"
@@ -28,7 +28,7 @@ models:
     kmer: 6
     shift: 1
     max_length: 512
-    conda_env: "prokbert_env"
+    conda_env: "prokbert_env"  # Unique environment (Python 3.10+)
     
   grover:
     class_name: "GroverModel"
@@ -36,14 +36,14 @@ models:
     tokenizer: "bpe"
     max_length: 510
     bpe_vocab_size: 5000
-    conda_env: "grover_env"
+    conda_env: "dna_transformers_env"  # Shared environment
     
   gena_lm:
     class_name: "GenaLMModel"
     pretrained_path: "AIRI-Institute/gena-lm-bert-base-t2t"
     tokenizer: "bpe"
     max_length: 4500
-    conda_env: "gena_lm_env"
+    conda_env: "dna_transformers_env"  # Shared environment
     
   inherit:
     class_name: "INHERITModel"
@@ -51,14 +51,14 @@ models:
     tokenizer: "kmer"
     kmer: 6
     max_length: 512
-    conda_env: "inherit_env"
+    conda_env: "dna_transformers_env"  # Shared environment
     
   hyenadna:
     class_name: "HyenaDNAModel"
     pretrained_path: "LongSafari/hyenadna-medium-450k-seqlen"
     tokenizer: "character"
     max_length: 450000
-    conda_env: "hyenadna_env"
+    conda_env: "dna_advanced_env"  # Shared advanced environment
     
   evo:
     class_name: "EVOModel"
@@ -66,7 +66,7 @@ models:
     tokenizer: "byte"
     max_length: 8192
     revision: "1.1_fix"
-    conda_env: "evo_env"
+    conda_env: "dna_advanced_env"  # Shared advanced environment
     
   caduceus:
     class_name: "CaduceusModel"
@@ -76,5 +76,5 @@ models:
     model_variant: "ph"
     rc_equivariance: true
     bidirectional: true
-    conda_env: "caduceus_env"
+    conda_env: "dna_advanced_env"  # Shared advanced environment
 
