@@ -18,24 +18,222 @@ This framework provides a unified interface for benchmarking multiple DNA langua
 
 ## Installation
 
+### Base Framework Installation
+
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/dna-benchmark.git
-cd dna-benchmark
+git clone https://github.com/leannmlindsey/dna_benchmark.git
+cd dna_benchmark
 
-# Install dependencies
+# Create base conda environment
+conda create -n dna_benchmark python=3.9 -y
+conda activate dna_benchmark
+
+# Install base dependencies
 pip install -r requirements.txt
 
 # Install the package in development mode
 pip install -e .
 ```
 
+### Model-Specific Environment Setup
+
+Each DNA language model has specific dependencies that may conflict with others. Therefore, **you must create a separate conda environment for each model** following the installation instructions from their respective repositories. The environment names specified below are used in the `config/models.yaml` file.
+
+#### 1. DNABERT1 Environment
+```bash
+# Create environment
+conda create -n dnabert1_env python=3.8 -y
+conda activate dnabert1_env
+
+# Install dependencies (from DNABERT repo)
+conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia
+pip install transformers==4.30.0
+pip install biopython pandas scikit-learn
+
+# Test import
+python -c "from transformers import AutoTokenizer, AutoModel; print('DNABERT1 environment ready')"
+```
+
+#### 2. DNABERT2 Environment
+```bash
+# Create environment
+conda create -n dnabert2_env python=3.9 -y
+conda activate dnabert2_env
+
+# Install dependencies (from DNABERT-2 repo)
+conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia
+pip install transformers==4.35.0
+pip install triton einops pandas scikit-learn
+
+# Test import
+python -c "from transformers import AutoTokenizer, AutoModelForMaskedLM; print('DNABERT2 environment ready')"
+```
+
+#### 3. Nucleotide Transformer Environment
+```bash
+# Create environment
+conda create -n nucleotide_transformer_env python=3.9 -y
+conda activate nucleotide_transformer_env
+
+# Install dependencies (from Nucleotide Transformer repo)
+conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia
+pip install transformers==4.30.0
+pip install einops>=0.6.0 pandas scikit-learn
+
+# Test import
+python -c "from transformers import AutoTokenizer, AutoModelForMaskedLM; print('NT environment ready')"
+```
+
+#### 4. ProkBERT Environment
+```bash
+# Create environment
+conda create -n prokbert_env python=3.9 -y
+conda activate prokbert_env
+
+# Install dependencies (from ProkBERT repo)
+conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia
+pip install transformers==4.30.0
+pip install tokenizers>=0.13.0 pandas scikit-learn
+
+# Test import
+python -c "from transformers import AutoTokenizer, AutoModel; print('ProkBERT environment ready')"
+```
+
+#### 5. GROVER Environment
+```bash
+# Create environment
+conda create -n grover_env python=3.8 -y
+conda activate grover_env
+
+# Install dependencies
+conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia
+pip install transformers==4.30.0
+pip install sentencepiece pandas scikit-learn
+
+# Test import
+python -c "import torch; print('GROVER environment ready')"
+```
+
+#### 6. GENA-LM Environment
+```bash
+# Create environment
+conda create -n gena_lm_env python=3.9 -y
+conda activate gena_lm_env
+
+# Install dependencies (from GENA-LM repo)
+conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia
+pip install transformers==4.30.0
+pip install pandas scikit-learn
+
+# Test import
+python -c "from transformers import AutoTokenizer, AutoModel; print('GENA-LM environment ready')"
+```
+
+#### 7. INHERIT Environment
+```bash
+# Create environment (uses same base as DNABERT1)
+conda create -n inherit_env python=3.8 -y
+conda activate inherit_env
+
+# Install dependencies
+conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia
+pip install transformers==4.30.0
+pip install biopython pandas scikit-learn
+
+# Test import
+python -c "from transformers import AutoTokenizer, AutoModel; print('INHERIT environment ready')"
+```
+
+#### 8. HyenaDNA Environment
+```bash
+# Create environment
+conda create -n hyenadna_env python=3.9 -y
+conda activate hyenadna_env
+
+# Install dependencies (from HyenaDNA repo)
+conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia
+pip install transformers==4.35.0
+pip install einops>=0.7.0 
+pip install flash-attn --no-build-isolation  # Optional but recommended for speed
+pip install pandas scikit-learn
+
+# Clone HyenaDNA repo for standalone model (if needed)
+git clone https://github.com/HazyResearch/hyena-dna.git
+
+# Test import
+python -c "import torch; print('HyenaDNA environment ready')"
+```
+
+#### 9. EVO Environment
+```bash
+# Create environment (requires Python 3.10+)
+conda create -n evo_env python=3.10 -y
+conda activate evo_env
+
+# Install dependencies (from EVO repo)
+conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia
+pip install transformers==4.35.0
+pip install einops>=0.7.0
+pip install flash-attn --no-build-isolation
+pip install pandas scikit-learn
+
+# Test import
+python -c "from transformers import AutoConfig, AutoModelForCausalLM; print('EVO environment ready')"
+```
+
+#### 10. Caduceus Environment
+```bash
+# Create environment (requires Python 3.10+)
+conda create -n caduceus_env python=3.10 -y
+conda activate caduceus_env
+
+# Install dependencies (from Caduceus repo)
+conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia
+pip install transformers==4.35.0
+pip install mamba-ssm causal-conv1d>=1.1.0
+pip install pandas scikit-learn
+
+# Test import
+python -c "import torch; print('Caduceus environment ready')"
+```
+
+### Verifying Installations
+
+After setting up all environments, verify they are correctly configured:
+
+```bash
+# List all conda environments
+conda env list | grep -E "dnabert|nucleotide|prokbert|grover|gena|inherit|hyena|evo|caduceus"
+
+# Test each environment
+for env in dnabert1_env dnabert2_env nucleotide_transformer_env prokbert_env grover_env gena_lm_env inherit_env hyenadna_env evo_env caduceus_env; do
+    echo "Testing $env..."
+    conda activate $env
+    python -c "import torch; import transformers; print(f'$env: PyTorch {torch.__version__}, Transformers {transformers.__version__}')"
+done
+```
+
+### Important Notes
+
+1. **GPU Memory**: Some models (especially HyenaDNA and EVO) require significant GPU memory. Ensure you have at least 16GB GPU memory for large models.
+
+2. **Conflicting Dependencies**: This is why separate environments are necessary. For example:
+   - DNABERT1 works best with older transformers versions
+   - HyenaDNA and EVO require newer Python and PyTorch versions
+   - Caduceus requires specific Mamba-related packages
+
+3. **Environment Names**: The environment names specified here (`dnabert1_env`, `dnabert2_env`, etc.) are referenced in `config/models.yaml`. If you use different names, update the configuration file accordingly.
+
+4. **Model Weights**: Model weights will be automatically downloaded from HuggingFace on first use. Ensure you have sufficient disk space (some models are several GB).
+
 ### Requirements
 
-- Python >= 3.8
+- Python >= 3.8 (3.10+ for EVO and Caduceus)
 - PyTorch >= 2.0.0
 - Transformers >= 4.30.0
-- CUDA-capable GPU (recommended)
+- CUDA-capable GPU (recommended, 16GB+ for large models)
+- Disk space: ~50GB for all model weights
 
 ## Project Structure
 
