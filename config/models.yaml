@@ -1,0 +1,70 @@
+models:
+  dnabert1:
+    class_name: "DNABert1Model"
+    pretrained_path: "zhihan1996/DNA_bert_6"
+    tokenizer: "kmer"
+    kmer: 6
+    max_length: 512
+    
+  dnabert2:
+    class_name: "DNABert2Model"
+    pretrained_path: "zhihan1996/DNABERT-2-117M"
+    tokenizer: "bpe"
+    max_length: 512
+    
+  nucleotide_transformer:
+    class_name: "NucleotideTransformerModel"
+    pretrained_path: "InstaDeepAI/nucleotide-transformer-v2-500m-multi-species"
+    tokenizer: "6mer"
+    max_length: 1000
+    
+  prokbert:
+    class_name: "ProkBERTModel"
+    pretrained_path: "neuralbioinfo/prokbert-mini"
+    tokenizer: "lca"
+    kmer: 6
+    shift: 1
+    max_length: 512
+    
+  grover:
+    class_name: "GroverModel"
+    pretrained_path: "PoetschLab/GROVER"
+    tokenizer: "bpe"
+    max_length: 510
+    bpe_vocab_size: 5000
+    
+  gena_lm:
+    class_name: "GenaLMModel"
+    pretrained_path: "AIRI-Institute/gena-lm-bert-base-t2t"
+    tokenizer: "bpe"
+    max_length: 4500
+    
+  inherit:
+    class_name: "INHERITModel"
+    pretrained_path: "zhihan1996/DNA_bert_6"
+    tokenizer: "kmer"
+    kmer: 6
+    max_length: 512
+    
+  hyenadna:
+    class_name: "HyenaDNAModel"
+    pretrained_path: "LongSafari/hyenadna-medium-450k-seqlen"
+    tokenizer: "character"
+    max_length: 450000
+    
+  evo:
+    class_name: "EVOModel"
+    pretrained_path: "togethercomputer/evo-1-8k-base"
+    tokenizer: "byte"
+    max_length: 8192
+    revision: "1.1_fix"
+    
+  caduceus:
+    class_name: "CaduceusModel"
+    pretrained_path: "kuleshov-group/caduceus-ph_seqlen-131k_d_model-256_n_layer-16"
+    tokenizer: "character"
+    max_length: 131072
+    model_variant: "ph"
+    rc_equivariance: true
+    bidirectional: true
+

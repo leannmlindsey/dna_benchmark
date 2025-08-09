@@ -1,0 +1,23 @@
+datasets:
+  prophage_bench_v1:
+    path: "data/processed/prophage_bench_v1"
+    splits:
+      train: 0.7
+      val: 0.15
+      test: 0.15
+    sequence_length: 1000
+    overlap: 200
+    label_type: "binary"
+    
+evaluation:
+  metrics:
+    - accuracy
+    - f1
+    - precision
+    - recall
+    - auroc
+    - auprc
+  
+  cross_validation:
+    n_folds: 5
+    stratified: true
