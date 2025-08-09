@@ -6,8 +6,19 @@ Abstract base class that defines the interface for all DNA language models
 import torch
 import numpy as np
 from abc import ABC, abstractmethod
-from typing import Dict, List, Optional, Tuple, Union
+from typing import Dict, List, Optional, Tuple, Union, Any, Callable
 import logging
+import sys
+import os
+from pathlib import Path
+
+# Add parent directory to path for imports
+sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+
+from src.utils.environment_manager import (
+    ModelEnvironmentContext,
+    run_model_in_environment
+)
 
 logger = logging.getLogger(__name__)
 
@@ -31,6 +42,10 @@ class BaseDNAModel(ABC):
         self.max_length = config.get('max_length', 512)
         self.num_labels = config.get('num_labels', 2)
         self.model_name = config.get('model_name', self.__class__.__name__)
+        
+        # Conda environment configuration
+        self.conda_env = config.get('conda_env', None)
+        self.use_env_manager = config.get('use_env_manager', True)
         
     @abstractmethod
     def load_pretrained(self, path: Optional[str] = None) -> None:
@@ -306,6 +321,82 @@ class BaseDNAModel(ABC):
             self.model.train()
         return self
     
+    def _run_with_environment(self, func: Callable, *args, **kwargs) -> Any:
+        """
+        Run a function within the model's conda environment if configured
+        
+        Args:
+            func: Function to run
+            *args, **kwargs: Arguments for the function
+            
+        Returns:
+            Result from the function
+        """
+        if self.use_env_manager and self.conda_env:
+            return run_model_in_environment(self.config, func, *args, **kwargs)
+        else:
+            return func(*args, **kwargs)
+    
+    def load_pretrained_with_env(self, path: Optional[str] = None) -> None:
+        """
+        Load pretrained model with environment management
+        
+        Args:
+            path: Path to model weights or HuggingFace model name
+        """
+        def _load():
+            return self.load_pretrained(path)
+        
+        return self._run_with_environment(_load)
+    
+    def get_embeddings_with_env(self, sequences: Union[str, List[str]]) -> torch.Tensor:
+        """
+        Get embeddings with environment management
+        
+        Args:
+            sequences: Single sequence or list of sequences
+            
+        Returns:
+            Tensor of embeddings
+        """
+        def _get_embeddings():
+            return self.get_embeddings(sequences)
+        
+        return self._run_with_environment(_get_embeddings)
+    
+    def predict_with_env(self, sequences: Union[str, List[str]]) -> Dict:
+        """
+        Make predictions with environment management
+        
+        Args:
+            sequences: Single sequence or list of sequences
+            
+        Returns:
+            Dictionary containing predictions
+        """
+        def _predict():
+            return self.predict(sequences)
+        
+        return self._run_with_environment(_predict)
+    
+    def fine_tune_with_env(self, train_dataset, val_dataset=None, **kwargs) -> Dict:
+        """
+        Fine-tune with environment management
+        
+        Args:
+            train_dataset: Training dataset
+            val_dataset: Validation dataset
+            **kwargs: Additional arguments
+            
+        Returns:
+            Training metrics
+        """
+        def _fine_tune():
+            return self.fine_tune(train_dataset, val_dataset, **kwargs)
+        
+        return self._run_with_environment(_fine_tune)
+    
     def __repr__(self):
-        return f"{self.__class__.__name__}(max_length={self.max_length}, num_labels={self.num_labels})"
+        env_info = f", conda_env={self.conda_env}" if self.conda_env else ""
+        return f"{self.__class__.__name__}(max_length={self.max_length}, num_labels={self.num_labels}{env_info})"
 

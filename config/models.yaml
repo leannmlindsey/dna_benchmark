@@ -5,18 +5,21 @@ models:
     tokenizer: "kmer"
     kmer: 6
     max_length: 512
+    conda_env: "dnabert1_env"
     
   dnabert2:
     class_name: "DNABert2Model"
     pretrained_path: "zhihan1996/DNABERT-2-117M"
     tokenizer: "bpe"
     max_length: 512
+    conda_env: "dnabert2_env"
     
   nucleotide_transformer:
     class_name: "NucleotideTransformerModel"
     pretrained_path: "InstaDeepAI/nucleotide-transformer-v2-500m-multi-species"
     tokenizer: "6mer"
     max_length: 1000
+    conda_env: "nucleotide_transformer_env"
     
   prokbert:
     class_name: "ProkBERTModel"
@@ -25,6 +28,7 @@ models:
     kmer: 6
     shift: 1
     max_length: 512
+    conda_env: "prokbert_env"
     
   grover:
     class_name: "GroverModel"
@@ -32,12 +36,14 @@ models:
     tokenizer: "bpe"
     max_length: 510
     bpe_vocab_size: 5000
+    conda_env: "grover_env"
     
   gena_lm:
     class_name: "GenaLMModel"
     pretrained_path: "AIRI-Institute/gena-lm-bert-base-t2t"
     tokenizer: "bpe"
     max_length: 4500
+    conda_env: "gena_lm_env"
     
   inherit:
     class_name: "INHERITModel"
@@ -45,12 +51,14 @@ models:
     tokenizer: "kmer"
     kmer: 6
     max_length: 512
+    conda_env: "inherit_env"
     
   hyenadna:
     class_name: "HyenaDNAModel"
     pretrained_path: "LongSafari/hyenadna-medium-450k-seqlen"
     tokenizer: "character"
     max_length: 450000
+    conda_env: "hyenadna_env"
     
   evo:
     class_name: "EVOModel"
@@ -58,6 +66,7 @@ models:
     tokenizer: "byte"
     max_length: 8192
     revision: "1.1_fix"
+    conda_env: "evo_env"
     
   caduceus:
     class_name: "CaduceusModel"
@@ -67,4 +76,5 @@ models:
     model_variant: "ph"
     rc_equivariance: true
     bidirectional: true
+    conda_env: "caduceus_env"
 
