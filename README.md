@@ -163,6 +163,7 @@ evaluation:
     - recall
     - auroc
     - auprc
+    - mcc
 ```
 
 ### Model Configuration (`config/models.yaml`)
@@ -222,6 +223,7 @@ The framework computes the following metrics:
 - **Recall**: True positives / (True positives + False negatives)
 - **AUROC**: Area under the ROC curve
 - **AUPRC**: Area under the Precision-Recall curve
+- **MCC**: Matthews Correlation Coefficient - a balanced measure for binary classification
 
 ## Advanced Features
 

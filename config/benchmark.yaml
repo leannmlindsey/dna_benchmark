@@ -17,6 +17,7 @@ evaluation:
     - recall
     - auroc
     - auprc
+    - mcc
   
   cross_validation:
     n_folds: 5
