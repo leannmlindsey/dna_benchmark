@@ -278,9 +278,9 @@ If you use this framework in your research, please cite:
 ```bibtex
 @software{dna_benchmark,
   title = {DNA Language Model Benchmarking Framework},
-  author = {Your Name},
+  author = {LeAnn Lindsey},
   year = {2024},
-  url = {https://github.com/yourusername/dna-benchmark}
+  url = {https://github.com/leannmlindsey/dna_benchmark}
 }
 ```
 
@@ -294,16 +294,21 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Acknowledgments
 
-This framework builds upon the following excellent DNA language models:
-- [DNABERT](https://github.com/jerryji1993/DNABERT)
-- [DNABERT-2](https://github.com/MAGICS-LAB/DNABERT_2)
-- [Nucleotide Transformer](https://github.com/instadeepai/nucleotide-transformer)
-- [ProkBERT](https://github.com/nbrg-ppcu/prokbert)
-- [HyenaDNA](https://github.com/HazyResearch/hyena-dna)
-- [EVO](https://github.com/evo-design/evo)
-- [Caduceus](https://github.com/kuleshov-group/caduceus)
-- And others listed in the models section
+This framework builds upon the following excellent DNA language models. Please cite the original papers and repositories if you use these models in your research:
+
+- **DNABERT**: [GitHub Repository](https://github.com/jerryji1993/DNABERT) | [HuggingFace](https://huggingface.co/zhihan1996/DNA_bert_6)
+- **DNABERT-2**: [GitHub Repository](https://github.com/MAGICS-LAB/DNABERT_2) | [HuggingFace](https://huggingface.co/zhihan1996/DNABERT-2-117M)
+- **Nucleotide Transformer**: [GitHub Repository](https://github.com/instadeepai/nucleotide-transformer) | [HuggingFace](https://huggingface.co/InstaDeepAI/nucleotide-transformer-v2-500m-multi-species)
+- **ProkBERT**: [GitHub Repository](https://github.com/nbrg-ppcu/prokbert) | [HuggingFace](https://huggingface.co/neuralbioinfo/prokbert-mini)
+- **GROVER**: [Zenodo](https://zenodo.org/records/13135894) | [HuggingFace](https://huggingface.co/PoetschLab/GROVER)
+- **GENA-LM**: [GitHub Repository](https://github.com/AIRI-Institute/GENA_LM) | [HuggingFace](https://huggingface.co/AIRI-Institute/gena-lm-bert-base-t2t)
+- **INHERIT**: [GitHub Repository](https://github.com/Celestial-Bai/INHERIT)
+- **HyenaDNA**: [GitHub Repository](https://github.com/HazyResearch/hyena-dna) | [HuggingFace](https://huggingface.co/LongSafari/hyenadna-medium-450k-seqlen)
+- **EVO**: [GitHub Repository (Evo-1)](https://github.com/evo-design/evo) | [GitHub Repository (Evo-2)](https://github.com/ArcInstitute/evo2) | [HuggingFace](https://huggingface.co/togethercomputer/evo-1-8k-base)
+- **Caduceus**: [GitHub Repository](https://github.com/kuleshov-group/caduceus) | [HuggingFace](https://huggingface.co/kuleshov-group/caduceus-ph_seqlen-131k_d_model-256_n_layer-16)
+
+**Important**: When using any of these models, please ensure you cite the original authors' work as specified in their respective repositories.
 
 ## Contact
 
-For questions and support, please open an issue on GitHub or contact [your.email@example.com].
+For questions and support, please open an issue on GitHub or contact leann.lindsey@nih.gov.
